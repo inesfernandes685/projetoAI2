@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# logs
+*.log
+
+# runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# misc
+.DS_Store
+
+build/
