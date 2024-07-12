@@ -16,7 +16,7 @@ const utiController = require('./src/controllers/utiController');
 const auth = require('./src/middlewares/decodeJWT');
 
 app.use(cors({
-  origin: ['http://localhost:3000'],
+  origin: ['http://localhost:3000', 'https://taskpro-sc3z.onrender.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -30,7 +30,7 @@ const storage = multer.diskStorage({
   destination: './uploads',
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    const filename = file.fieldname + '-' + Date.now() + ext; // Preserva a extensão original
+    const filename = file.fieldname + '-' + Date.now() + ext; 
     cb(null, filename);
   }
 });
