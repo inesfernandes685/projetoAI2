@@ -13,4 +13,5 @@ pids
 # misc
 .DS_Store
 
+# ficheiros de build
 build/
