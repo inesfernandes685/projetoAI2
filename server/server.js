@@ -6,7 +6,7 @@ const cors = require('cors');
 const path = require('path');
 const multer = require('multer');
 const sincronizarTabelas  = require('./src/utils/criarTabelas');
-
+  
 const authRoutes = require('./src/routes/authRoutes');
 const notaRoutes = require('./src/routes/notaRoutes');
 const projetoRoutes = require('./src/routes/projetoRoutes');

@@ -31,7 +31,9 @@ exports.getUtilizador = async (req, res) => {
 
 exports.editarUtilizador = async (req, res) => {
     const { id } = req.params;
-    const { nome, email, foto, username} = req.body;
+    const { nome, email, foto, username, estado, isAdmin} = req.body;
+
+    console.log(req.body)
 
     try {
         const utilizador = await Utilizador.findByPk(id);
@@ -40,7 +42,8 @@ exports.editarUtilizador = async (req, res) => {
             return res.status(404).send({ error: 'Utilizador não encontrado' });
         }
 
-        await Utilizador.update({ nome, email, foto, username}, { where: { id } });
+        await Utilizador.update({ nome, email, foto, username, estado, isAdmin}, { where: { id } });
+
         res.send({ message: 'Utilizador editado com sucesso' });
     } catch (error) {
         console.error('Erro ao editar utilizador:', error);
