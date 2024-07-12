@@ -28,9 +28,9 @@
   },
   "scripts": {
     "start:local": "cross-env REACT_APP_API_URL=http://localhost:3001 react-scripts start",
-    "start:host": "cross-env REACT_APP_API_URL=https://pint-f1tf.onrender.com react-scripts start",
+    "start:host": "cross-env REACT_APP_API_URL=https://projetoai2.onrender.com react-scripts start",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "cross-env REACT_APP_API_URL=https://projetoai2.onrender.com react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
