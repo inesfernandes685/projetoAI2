@@ -58,7 +58,7 @@ function RecuperarPasseForm() {
                 variant="contained"
                 color="primary"
                 fullWidth
-                sx={{ mb: 0, ml: 0 }} // Add margin bottom and left
+                sx={{ mb: 0, ml: 0 }} 
             >
                 RECUPERAR PALAVRA-PASSE
             </Button>
@@ -68,7 +68,7 @@ function RecuperarPasseForm() {
                 variant="outlined"
                 color="primary"
                 fullWidth
-                sx={{ mb: 0, ml: 0 }} // Add margin bottom and left
+                sx={{ mb: 0, ml: 0 }} 
             >
                 CANCELAR
             </Button>

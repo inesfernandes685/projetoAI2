@@ -56,7 +56,7 @@ const Projeto = () => {
             const response = await api.get(`/colunas/${idProjeto}`);
             setColunas(response.data.colunas);
         } catch (error) {
-            console.error('Erro ao buscar colunas:', error);
+            console.error('Erro ao procurar colunas:', error);
         }
     }, []);
 
@@ -67,7 +67,7 @@ const Projeto = () => {
             const response = await api.get(`/notas/projeto/${idProjeto}`);
             setNotas(response.data);
         } catch (error) {
-            console.error('Erro ao buscar notas:', error);
+            console.error('Erro ao procurar notas:', error);
         }
     }, []);
 
@@ -79,7 +79,7 @@ const Projeto = () => {
             setUtilizadores(response.data);
             console.log(response.data)
         } catch (error) {
-            console.error('Erro ao buscar utilizadores:', error);
+            console.error('Erro ao procurar utilizadores:', error);
         }
     }, []);
 

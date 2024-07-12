@@ -38,10 +38,9 @@ function EditarPerfil({ open, handleClose, perfil, onUpdate }) {
           }
         });
         console.log('Foto enviada com sucesso:', responseFoto.data);
-        setFoto(responseFoto.data); // Atualiza a foto no estado local
+        setFoto(responseFoto.data); // Atualiza a foto localmente, até guardar as alterações
       }
 
-      // Atualiza nome e username se foram alterados
       if (nome !== perfil.nome || username !== perfil.username) {
         const dadosAtualizados = {
           nome: nome,
@@ -49,10 +48,10 @@ function EditarPerfil({ open, handleClose, perfil, onUpdate }) {
         };
         const responseDados = await api.put(`/utilizadores/${perfil.id}`, dadosAtualizados);
         console.log('Dados atualizados com sucesso:', responseDados.data);
-        onUpdate(responseDados.data); // Atualiza o perfil com os novos dados
+        onUpdate(responseDados.data); 
       }
 
-      handleClose(); // Fecha o diálogo após o sucesso
+      handleClose(); 
     } catch (error) {
       console.error('Erro ao salvar alterações:', error.message);
     } finally {

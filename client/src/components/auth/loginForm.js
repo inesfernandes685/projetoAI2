@@ -170,7 +170,7 @@ function Login({ setIsAuthenticated: setAuth }) {
             variant="contained"
             color="primary"
             fullWidth
-            sx={{ mb: 0, ml: 0 }} // Add margin bottom
+            sx={{ mb: 0, ml: 0 }} 
             >
             ENTRAR
             </Button>

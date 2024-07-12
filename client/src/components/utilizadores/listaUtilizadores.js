@@ -19,7 +19,7 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Link as RouterLink, // Renomear para evitar conflito com o Link do react-router-dom
+  Link as RouterLink,  
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import api from '../api/api';
@@ -30,7 +30,6 @@ const ListaUtilizadores = () => {
   const [utilizador, setUtilizador] = useState({ id: '', nome: '', email: '', estado: false, isAdmin: false });
   const [isEdit, setIsEdit] = useState(false);
 
-  // State para armazenar os projetos do usuário selecionado
   const [projetosUtilizador, setProjetosUtilizador] = useState([]);
   const [openProjetosDialog, setOpenProjetosDialog] = useState(false);
 
@@ -43,17 +42,17 @@ const ListaUtilizadores = () => {
       const response = await api.get('/utilizadores');
       setUtilizadores(response.data);
     } catch (error) {
-      console.error('Erro ao buscar utilizadores:', error);
+      console.error('Erro ao procurar utilizadores:', error);
     }
   };
 
   const fetchProjetosUtilizador = async (idUtilizador) => {
     try {
-      const response = await api.get(`/projetos/${idUtilizador}/projetos`); // Endpoint ajustado para buscar projetos do usuário
+      const response = await api.get(`/projetos/${idUtilizador}/projetos`); 
       setProjetosUtilizador(response.data);
-      setOpenProjetosDialog(true); // Abrir diálogo ao carregar projetos
+      setOpenProjetosDialog(true); 
     } catch (error) {
-      console.error('Erro ao buscar projetos do usuário:', error);
+      console.error('Erro ao procurar projetos do utilizador:', error);
     }
   };
 
@@ -93,7 +92,6 @@ const ListaUtilizadores = () => {
 
   const handleVerProjetos = (idUtilizador, nomeUtilizador) => {
     fetchProjetosUtilizador(idUtilizador);
-    // Adicionar o nome do utilizador ao state para exibir no título do diálogo de projetos
     setUtilizadorNome(nomeUtilizador);
   };
 
@@ -215,7 +213,6 @@ const ListaUtilizadores = () => {
                         component="button"
                         variant="body2"
                         onClick={() => {
-                          // Navega para a página de detalhes do projeto
                           window.location.href = `/projetos/${projeto.id}`;
                         }}
                       >

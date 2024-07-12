@@ -1,4 +1,3 @@
-// models/notaModel.js
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../utils/database');
 const Utilizador = require('./utilizadorModel');

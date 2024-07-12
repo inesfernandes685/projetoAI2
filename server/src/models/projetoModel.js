@@ -45,7 +45,6 @@
         freezeTableName: true
     });
 
-    // Define as relações
     Projeto.belongsTo(Utilizador, { foreignKey: 'idCriador' });
     Projeto.belongsToMany(Utilizador, { through: ProjetoUtilizador, foreignKey: 'idProjeto' });
     Utilizador.belongsToMany(Projeto, { through: ProjetoUtilizador, foreignKey: 'idUtilizador' });

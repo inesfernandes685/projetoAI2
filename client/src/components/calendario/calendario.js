@@ -18,20 +18,20 @@ const Calendario = () => {
         const response = await api.get('/notas/utilizador');
         setNotas(response.data);
       } catch (error) {
-        console.error('Erro ao buscar notas:', error.response || error.message);
+        console.error('Erro ao procurar notas:', error.response || error.message);
       }
     };
 
     fetchNotas();
-  }, []); // Executa apenas uma vez ao montar o componente
+  }, []); 
 
   const handleSelectNota = (nota) => {
     console.log('Nota selecionada:', nota);
-    navigate(`/projetos/${nota.idProjeto}`); // Navegar para a página do projeto da nota
+    navigate(`/projetos/${nota.idProjeto}`); 
   };
 
   const eventStyleGetter = (event, start, end, isSelected) => {
-    let backgroundColor = '#ccc'; // Cor padrão para notas sem prioridade
+    let backgroundColor = '#ccc'; 
 
     if (event.prioridade === 'Casual') {
       backgroundColor = '#008631'; // Verde para prioridade Casual
@@ -59,13 +59,13 @@ const Calendario = () => {
           end: nota.data ? new Date(nota.data) : new Date(),
           description: nota.descricao,
           prioridade: nota.prioridade,
-          idProjeto: nota.idProjeto, // Incluir idProjeto para navegação
+          idProjeto: nota.idProjeto,
         }))}
         startAccessor="start"
         endAccessor="end"
         style={{ height: '100%' }}
         onSelectEvent={handleSelectNota}
-        eventPropGetter={eventStyleGetter} // Aplicar estilo baseado na prioridade da nota
+        eventPropGetter={eventStyleGetter} 
         messages={{
           next: "Seguinte",
           previous: "Anterior",

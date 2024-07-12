@@ -13,23 +13,21 @@ sequelize.authenticate()
   });
 const criarDadosTeste = async () => {
   try {
-    // Insira dados de teste para Utilizador
     await Utilizador.create({
       nome: 'Utilizador Comum',
-      email: 'teste@mail.com',
+      email: 'teste@email.com',
       password: '$2a$10$wWPlEIBW0ZAdgPrG39mQW.h6uEqKssgpZbZxN7eRzTRQIpRkFfD2u',
       estado: true,
     });
 
     await Utilizador.create({
       nome: 'Admin',
-      email: 'admin@mail.com',
+      email: 'admin@email.com',
       password: '$2a$10$wWPlEIBW0ZAdgPrG39mQW.h6uEqKssgpZbZxN7eRzTRQIpRkFfD2u',
       estado: true,
       isAdmin: true
     });
 
-    // Insira dados de teste para Projeto
     await Projeto.create({
       nome: 'Projeto Teste',
       descricao: 'Descrição do projeto teste',
@@ -122,7 +120,6 @@ const sincronizarTabelas = async () => {
 
     console.log('Tabelas sincronizadas');
 
-    // Chame a função para criar dados de teste após a sincronização
     await criarDadosTeste();
   } catch (error) {
     console.error('Erro ao sincronizar tabelas:', error);

@@ -86,6 +86,7 @@ exports.getProjetos = async (req, res) => {
     }
 }
 
+//esta vai identificar o utilizador pelo token e devolver os projetos a que ele pertence
 exports.getProjetosToken = async (req, res) => {
     try {
         const projetosUtilizador = await ProjetoUtilizador.findAll({

@@ -20,7 +20,7 @@ const DashboardMain = () => {
 
   const handleCloseEditarPerfil = () => {
     setOpenEditarPerfil(false);
-    fetchUtilizador(); // Atualiza o utilizador após fechar o modal de edição
+    fetchUtilizador();
   };
 
   const fetchUtilizador = async (perfilAtualizado = null) => {

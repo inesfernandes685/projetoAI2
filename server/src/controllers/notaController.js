@@ -68,19 +68,16 @@ exports.criarNota = async (req, res) => {
 };
 
 exports.atualizarNota = async (req, res) => {
-  const { id } = req.params; // Captura o id da nota a ser atualizada
-  const { idColuna, titulo, descricao, prioridade, estado, data} = req.body; // Captura os novos valores enviados no corpo da requisição
+  const { id } = req.params; 
+  const { idColuna, titulo, descricao, prioridade, estado, data} = req.body; 
 
   try {
-      // Busca a nota pelo ID
       let nota = await Nota.findByPk(id);
 
-      // Verifica se a nota existe
       if (!nota) {
           return res.status(404).json({ error: 'Nota não encontrada' });
       }
 
-      // Atualiza apenas os campos recebidos no corpo da requisição
       if (idColuna !== undefined) {
           nota.idColuna = idColuna;
       }
@@ -99,6 +96,8 @@ exports.atualizarNota = async (req, res) => {
       if (data !== undefined) {
           nota.data = data;
       }
+
+      //só guarda os dados que recebe, para não deixar dados já definidos a null
 
       nota = await nota.save();
 
