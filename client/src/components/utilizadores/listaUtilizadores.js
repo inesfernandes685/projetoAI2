@@ -99,13 +99,9 @@ const ListaUtilizadores = () => {
 
   return (
     <div style={{ width: '98%' }}>
-      <Typography variant="h4" component="h1" sx={{mt: 2}} gutterBottom>
+      <Typography variant="h4" component="h1" sx={{mt: 3, mb: 5, fontWeight: '600'}} gutterBottom>
          Gerir Utilizadores
-      </Typography>
-      <Button variant="contained" color="primary" onClick={() => handleClickOpen()}>
-        Adicionar Utilizador
-      </Button>
-
+      </Typography> 
       <TableContainer component={Paper} style={{ marginTop: '20px' }}>
         <Table aria-label="Lista de Utilizadores">
           <TableHead>

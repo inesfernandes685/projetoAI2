@@ -109,13 +109,13 @@ exports.getProjetosToken = async (req, res) => {
 
 exports.getProjetosUtilizador = async (req, res) => {
     const { idUtilizador } = req.params;
-    
+    //espera ter um id do utilizador pela rota 
     try {
         const projetosUtilizador = await ProjetoUtilizador.findAll({
             where: { idUtilizador },
             include: { model: Projeto }
         });
-
+        //procura na tabela ProjetoUtilizador todos os projetos associados ao utilizador com o id recebido
         const projetos = projetosUtilizador.map(projetoUtilizador => projetoUtilizador.Projeto);
 
         res.send(projetos);
@@ -129,10 +129,11 @@ exports.getProjetosUtilizador = async (req, res) => {
 exports.getProjeto = async (req, res) => {
     try {
         const { id } = req.params;
+        //recebe o id do projeto, por exemplo /projetos/1
         const projeto = await Projeto.findByPk(id, {
             include: { all: true }
         });
-
+        //procura o projeto com o id recebido e mostra tudo sobre ele
         if (!projeto) {
             return res.status(404).send({ error: 'Projeto não encontrado' });
         }
@@ -160,17 +161,18 @@ exports.gerarLinkPartilha = async (req, res) => {
 
 exports.getDadosPorToken = async (req, res) => {
     const token = req.query.token;
-    console.log(req.query);
+    //recebe o token
     try {
         const { idProjeto } = descodificarTokenPartilha(token); 
         console.log('Dados:', { idProjeto });
-
+        //através do token, descodifica os dados
         const projeto = await Projeto.findByPk(idProjeto); 
         if (!projeto) {
             return res.status(404).send('Projeto não encontrado');
         }
-
+        //a partir do id descodificado, ele sabe qual vai ser o projeto
         res.send(projeto); 
+        //devolve o projeto como resposta
     } catch (error) {
         console.error('Erro ao obter dados por token:', error);
         res.status(500).send('Erro ao obter dados por token');
@@ -178,25 +180,26 @@ exports.getDadosPorToken = async (req, res) => {
 };
 
 exports.aceitarPartilha = async (req, res) => {
-    const idUtilizador = req.user.id;
-    const token = req.body.token;
+    const idUtilizador = req.user.id; //isto é o id de quem tem a sessão iniciada
+    const token = req.body.token; //isto foi recebido pelo link
 
     console.log('Token:', token);
 
     try {
-        const dados = descodificarTokenPartilha(token);
+        const dados = descodificarTokenPartilha(token); //a partir do token que estava no link, já sabe qual é o projeto
         const idProjeto = dados.idProjeto;
-
+        //aqui já sabe qual é o projeto
+        //através do req.user.id, sabe quem é o utilizador que está a aceitar a partilha
         const jaExiste = await ProjetoUtilizador.findOne({
             where: { idProjeto, idUtilizador }
         });
-
+        //verifica se o utilizador já está associado ao projeto
         if (jaExiste) {
             return res.status(400).send('Utilizador já está associado a este projeto.');
         }
-
+        //se o utilizador já estiver associado, não faz nada
         await ProjetoUtilizador.create({ idProjeto, idUtilizador });
-
+        //se o utilizador não estiver associado, associa-o, isto é, adiciona à tabela uma entrada com o id do utilizador e o id do projeto
         res.send('Partilha aceita com sucesso.');
     } catch (error) {
         console.error('Erro ao aceitar partilha:', error);

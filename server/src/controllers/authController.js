@@ -7,12 +7,14 @@ require('dotenv').config();
 const gerarToken = require('../middlewares/gerarToken');
 
 exports.getUtilizador = (req, res) => {
+  //o req.user é para obter o utilizador que está autenticado
   res.send(req.user);
 };
 
 exports.getUtilizadorCompleto = async (req, res) => {
   try {
     const utilizador = await Utilizador.findByPk(req.user.id);
+    //pelo req.user, ou seja, por quem está com sessão iniciada, são pesquisados e devolvidos os dados todos
     if (!utilizador) {
       return res.status(404).send({ error: 'Utilizador não encontrado' });
     }
@@ -75,6 +77,7 @@ exports.criarConta = async (req, res) => {
     }
 
     const user = await Utilizador.findOne({ where: { email } });
+    //verifica se o email já está em uso
     if (user) {
       return res.status(400).send({ error: 'Email já está em uso' });
     }
@@ -133,18 +136,22 @@ const enviarEmail = async (options) => {
 exports.verificarEmail = async (req, res) => {
   try {
     const { token } = req.body || req.query; 
+    //recebe o token pelo link de verificar email
 
     if (!token) {
       return res.status(400).send({ error: 'Token de verificação não fornecido' });
     }
 
     const user = await Utilizador.findOne({ where: { tokenVerificacao: token } });
+    //encontra o utilizador que tem de validar
     if (!user) {
       return res.status(400).send({ error: 'Token de verificação inválido' });
     }
 
     user.estado = true;
+    //muda o estado do utilizador para true, ou seja, a conta está verificada
     user.tokenVerificacao = null;
+    //já foi validado, não é necessário o token
     await user.save();
 
     res.status(200).send({ message: 'Email verificado com sucesso. Pode seguir para o login' });
@@ -184,6 +191,7 @@ exports.recuperarPasse = async (req, res) => {
 exports.novaPasse = async (req, res) => {
   try {
     const { token, novaPass } = req.body;
+    console.log(req.body);
 
     const user = await Utilizador.findOne({ where: { tokenVerificacao: token } });
     if (!user) {
@@ -193,7 +201,9 @@ exports.novaPasse = async (req, res) => {
     user.isPrimeiroLogin = false;
     await user.save();
 
-    const hashedPassword = await bcrypt.hash(novaPass, 12);
+    console.log(novaPass);
+    const hashedPassword = await bcrypt.hash(novaPass, 10);
+    console.log(hashedPassword);
     user.palavra_passe = hashedPassword;
     user.recoveryToken = null;
     await user.save();

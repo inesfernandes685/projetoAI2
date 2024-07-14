@@ -71,12 +71,10 @@ exports.apagarUtilizador = async (req, res) => {
 
 exports.atualizarFotoUtilizador = async (req, res) => {
     const id  = req.user.id
-    console.log(req.user.id)
     const foto = req.file ? req.file.filename : null;
 
     try {
         const utilizador = await Utilizador.findByPk(id);
-        console.log(utilizador)
 
         if (!utilizador) {
             return res.status(404).send({ error: 'Utilizador não encontrado' });

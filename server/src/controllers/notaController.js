@@ -1,6 +1,7 @@
 const Nota = require('../models/notaModel');
 const {Projeto, ProjetoUtilizador} = require('../models/projetoModel');
 
+//este recebe o id do projeto pelos parametros, devolve todas as notas desse projeto
 exports.getNotasProjeto = async (req, res) => {
   try {
     const { id } = req.params;
@@ -8,9 +9,11 @@ exports.getNotasProjeto = async (req, res) => {
     const whereClause = {
       idProjeto: id,
     };
+    //recebe o id projeto e procura o projeto com esse id
     if (idColuna) {
       whereClause.idColuna = idColuna;
     }
+    //já encontrou o projeto, agora procura as notas desse projeto
     const notas = await Nota.findAll({
       where: whereClause,
     });
