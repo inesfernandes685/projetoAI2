@@ -20,7 +20,7 @@ const DashboardProjetos = () => {
   };
 
   return (
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <Card sx={{ display: 'flex', flexDirection: 'column' }}>
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography variant="h6" gutterBottom>
           Continue o seu trabalho!

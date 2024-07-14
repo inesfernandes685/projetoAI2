@@ -40,7 +40,6 @@ const Projeto = () => {
     const fetchProjetos = async () => {
         try {
             const response = await api.get('/projetos');
-            //procura os projetos e guarda-os no campo projetos para aceder com, por exemplo, projetos.nome
             setProjetos(response.data);
             if (response.data.length > 0 && !projetoId) {
                 navigate(`/projetos/${response.data[0].id}`);
@@ -85,23 +84,23 @@ const Projeto = () => {
     }, []);
 
     const onDragEnd = useCallback(async (result) => {
-        const { fim, inicio, idNota } = result;
+        const { destination, source, draggableId } = result;
 
-        if (!fim) {
+        if (!destination) {
             return;
         }
 
         if (
-            fim.droppableId === inicio.droppableId &&
-            fim.index === inicio.index
+            destination.droppableId === source.droppableId &&
+            destination.index === source.index
         ) {
             return;
         }
 
-        const notaArrastada = notas.find(n => n.id.toString() === idNota);
-        notaArrastada.idColuna = fim.droppableId;
+        const notaArrastada = notas.find(n => n.id.toString() === draggableId);
+        notaArrastada.idColuna = destination.droppableId;
 
-        const newNotas = notas.map(n => (n.id.toString() === idNota ? notaArrastada : n));
+        const newNotas = notas.map(n => (n.id.toString() === draggableId ? notaArrastada : n));
         setNotas(newNotas);
 
         try {
@@ -327,7 +326,7 @@ const Projeto = () => {
                 progress: undefined,
             });
         } catch (error) {
-            console.error('Erro ao gerar link de partilha:', error);
+            console.error('Erro ao gerar link de compartilhamento:', error);
         }
     };
 

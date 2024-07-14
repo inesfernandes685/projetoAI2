@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DashboardProjetos from './dashboardProjetos';
 import DashboardCriar from './dashboardCriar';
-import DashboardUtilizador from './dashboardUti';
 import api from '../api/api';
 import { Avatar, Typography, Button, Box, Grid } from '@mui/material';
 import EditarPerfil from '../utilizadores/editarPerfil';
@@ -74,10 +73,10 @@ const DashboardMain = () => {
 
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2} sx={{ height: '83vh', width: '99%' }}>
-          <Grid item xs={12} md={12} sx={{ display: 'flex', flexDirection: 'column', maxHeight: '45vh', marginBottom: 0, padding: 0 }}>
+          <Grid item xs={12} md={12} sx={{ display: 'flex', flexDirection: 'column', marginBottom: 0, padding: 0 }}>
             <DashboardCriar sx={{ flexGrow: 1, margin: 0, padding: 0 }} />
           </Grid>
-          <Grid item xs={12} md={12} sx={{ display: 'flex', flexDirection: 'column', mt: -15, padding: 0 }}>
+          <Grid item xs={12} md={12} sx={{ display: 'flex', flexDirection: 'column', padding: 0, minHeight: '40vh'}}>
             <DashboardProjetos sx={{ flexGrow: 1, margin: 0, padding: 0 }} />
           </Grid>
         </Grid>

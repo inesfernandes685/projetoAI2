@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Select, MenuItem, FormControl, InputLabel, FormControlLabel, Checkbox } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Select, MenuItem, FormControl, InputLabel, FormControlLabel, Checkbox, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Swal from 'sweetalert2';
 
-const EditarNota = ({ open, onClose, nota, onSave, onNotaChange}) => {
+const EditarNota = ({ open, onClose, nota, onSave, onNotaChange, onDelete }) => {
     const [notaEditada, setNotaEditada] = useState({ ...nota });
 
     useEffect(() => {
@@ -25,6 +27,31 @@ const EditarNota = ({ open, onClose, nota, onSave, onNotaChange}) => {
         onNotaChange(notaEditada);
     };
 
+    const handleDelete = () => {
+        onClose();
+        Swal.fire({
+            title: 'Você tem certeza?',
+            text: "Você deseja apagar esta nota?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#008B98',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sim, apagar!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                onDelete(nota.id);  
+                Swal.fire({
+                    title: 'Nota apagada!',
+                    text: 'A nota foi apagada com sucesso.',
+                    icon: 'success',
+                    confirmButtonColor: '#008B98',
+                });
+                onClose();
+            }
+        });
+    };
+
     const formatDateForInput = (date) => {
         if (!date) return ''; 
         const formattedDate = new Date(date).toISOString().split('T')[0];
@@ -33,7 +60,18 @@ const EditarNota = ({ open, onClose, nota, onSave, onNotaChange}) => {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Editar Nota</DialogTitle>
+            <DialogTitle>
+                Editar Nota
+                <IconButton
+                    edge="end"
+                    color="inherit"
+                    aria-label="delete"
+                    onClick={handleDelete}
+                    style={{ position: 'absolute', left: 12.8, bottom: 21, color: 'grey' }}
+                >
+                    <DeleteIcon />
+                </IconButton>
+            </DialogTitle>
             <DialogContent>
                 <TextField
                     autoFocus

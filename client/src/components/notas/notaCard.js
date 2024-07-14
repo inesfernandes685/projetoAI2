@@ -23,6 +23,17 @@ const NotaCard = ({ nota, index, onNotaChange }) => {
         atualizarCorDaBorda(nota);
     }, [nota]);
 
+    const handleDelete = (id) => {
+        api.delete(`/notas/${id}`)
+            .then(() => {
+                onNotaChange(null);
+            })
+            .catch((error) => {
+                console.error('Erro ao apagar nota:', error);
+            });
+    };
+
+
     const handleAbrirEditarNota = () => {
         if (onNotaChange) {
             onNotaChange(nota); 
@@ -107,6 +118,7 @@ const NotaCard = ({ nota, index, onNotaChange }) => {
                 nota={notaSelecionada}
                 onSave={handleGuardarAlteracoes}
                 onNotaChange={onNotaChange}
+                onDelete={handleDelete}
             />
         </>
     );

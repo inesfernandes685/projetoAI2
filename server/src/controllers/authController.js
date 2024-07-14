@@ -204,7 +204,7 @@ exports.novaPasse = async (req, res) => {
     console.log(novaPass);
     const hashedPassword = await bcrypt.hash(novaPass, 10);
     console.log(hashedPassword);
-    user.palavra_passe = hashedPassword;
+    user.password = hashedPassword;
     user.recoveryToken = null;
     await user.save();
 
