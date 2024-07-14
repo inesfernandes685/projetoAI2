@@ -53,7 +53,7 @@ const DashboardMain = () => {
   }, [utilizador]);
 
   return (
-    <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ height: '80vh', display: 'flex', flexDirection: 'column' }}>
       {utilizador && (
         <Typography variant="h4" sx={{ display: 'flex', alignItems: 'center', marginBottom: 2, marginTop: 2 }}>
           <Avatar sx={{ width: 55, height: 55, marginRight: 2 }} alt={utilizador?.nome} src={url + '/uploads/' + utilizador?.foto}/>
